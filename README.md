@@ -42,10 +42,10 @@ Make sure you have Kafka and MySQL running. Update the following environment var
 To run the FastAPI application that publishes location data to Kafka:
 
 ```bash
-uvicorn main:app --reload
+python producer.py --reload
 ```
 
-Visit the endpoint at `http://localhost:8000/docs` to interact with the API and send location data.
+Visit the endpoint at `http://localhost:8080/docs` to interact with the API and send location data.
 
 ### 4. Running the Kafka Consumer
 
@@ -77,7 +77,6 @@ Publish location data to the Kafka topic.
 {
   "latitude": 52.5200,
   "longitude": 13.4050,
-  "timestamp": 1632834000,
   "user_id": "user_123"
 }
 ```

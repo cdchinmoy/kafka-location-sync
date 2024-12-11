@@ -2,14 +2,17 @@ from confluent_kafka import Consumer
 import mysql.connector
 import json
 import time
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 # Kafka Consumer Configuration
-KAFKA_BOOTSTRAP_SERVERS = "localhost:29092"
-KAFKA_TOPIC = "live_location"
-KAFKA_GROUP_ID = "location-group"
+KAFKA_BROKER = f"{os.getenv("KAFKA_SERVER")}:{os.getenv("KAFKA_PORT")}"
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC")
+KAFKA_GROUP_ID = os.getenv("KAFKA_GROUP_ID")
 
 consumer = Consumer({
-    "bootstrap.servers": KAFKA_BOOTSTRAP_SERVERS,
+    "bootstrap.servers": KAFKA_BROKER,
     "group.id": KAFKA_GROUP_ID,
     "auto.offset.reset": "earliest",
 })
@@ -20,10 +23,10 @@ consumer.subscribe([KAFKA_TOPIC])
 def create_connection():
     try:
         connection = mysql.connector.connect(
-            host="localhost",
-            user="chinmoy",
-            password="Chinmoy^123456",
-            database="kafka"
+            host = os.getenv("DB_HOST"),
+            user = os.getenv("DB_USER"),
+            password = os.getenv("DB_PASSWORD"),
+            database = os.getenv("DB_NAME"),
         )
         if connection.is_connected():
             print("Connected to MySQL")
