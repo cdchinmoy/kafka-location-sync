@@ -88,7 +88,3 @@ Publish location data to the Kafka topic.
   "status": "Location data sent successfully"
 }
 ```
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
